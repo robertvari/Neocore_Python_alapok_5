@@ -1,5 +1,5 @@
-import random
-from game_assets.characters import AIPlayer
+import random, os, time
+from characters import AIPlayer
 
 class Location_Base:
     def __init__(self, name) -> None:
@@ -10,18 +10,52 @@ class Location_Base:
         self._create()
     
     def _create(self):
-        for _ in random.range(0, 10):
+        for _ in range(random.randint(0, 10)):
             self._ai_players.append(AIPlayer())
 
     def enter(self, player):
+        self._clear_screen()
         self._player = player
 
+    def _clear_screen(self):
+        os.system("cls")
 
 class Tavern(Location_Base):
     pass
 
 class Village(Location_Base):
-    pass
+    def enter(self, player):
+        super().enter(player)
+
+        print(f"Wellcome {player} in the Black Horse tavern.")
+        time.sleep(1)
+
+        print("If you have gold you can buy a dring")
+        print("1 Buy a dring")
+        print("2 Exit tavern")
+
+        response = input()
+
+        if response == "2":
+            print("See you later. Safe travel!")
+        else:
+            print("You bought a cup of beer.")
 
 class Forest(Location_Base):
-    pass
+    def enter(self, player):
+        super().enter(player)
+
+        print("You entered into a dark forest.")
+        time.sleep(1)
+        print("You hear something from a nearby bush.")
+        time.sleep(3)
+        
+        print("Something attacks yout...")
+
+
+if __name__ == "__main__":
+    from characters import Player
+    player = Player()
+
+    village = Village("Whiterun")
+    village.enter(player)
