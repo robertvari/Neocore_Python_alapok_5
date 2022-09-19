@@ -48,17 +48,21 @@ class Tavern(Location_Base):
         print(f"Wellcome {self._player} in the {self._name} tavern.")
         time.sleep(1)
 
-        print("If you have gold you can buy a dring")
-        print("1 Buy a dring")
-        print("2 Exit tavern")
+        print("If you have gold you can buy something from this list")
+        for index, item in enumerate(self._shop_list):
+            print(f"{index} {item} price: {item.price} weight: {item.weight}")
+
+        print(f"{index + 1} leave tavern.")
 
         response = input()
 
-        if response == "1":
-            print("You buy a drink")
-            input()
-        else:
+        if response == str(index + 1):
             self._game_instance.village.enter()
+        else:
+            choosen_item = self._shop_list[int(response)]
+            self._player.buy(choosen_item)
+        
+        self.enter()
 
 class Village(Location_Base):
     def enter(self):
@@ -83,7 +87,10 @@ class Village(Location_Base):
             time.sleep(2)
             self._game_instance.forest.enter()
         else:
+            self._clear_screen()
             print("Exit game")
+            time.sleep(3)
+            exit()
 
 class Forest(Location_Base):
     def enter(self):

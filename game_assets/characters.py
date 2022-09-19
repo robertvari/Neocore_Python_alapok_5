@@ -37,11 +37,13 @@ class Character_Base:
             print(f"You don't have enough gold to buy a {item}")
             print(f"{item} price: {item.price}")
             print(f"My golds: {self._golds}")
+            time.sleep(3)
             return
 
         if self.inventory_weight + item.weight > self._strength:
             print("Inventory is heavy :(")
             print(f"Inventory weight: {self.inventory_weight}")
+            time.sleep(3)
             return
 
         print(f"{self._name} bought {item}")
