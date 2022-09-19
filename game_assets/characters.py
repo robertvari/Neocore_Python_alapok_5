@@ -1,4 +1,4 @@
-import random
+import random, time
 
 class Character_Base:
     race_list = {
@@ -32,6 +32,29 @@ class Character_Base:
         self._strength = self.race_list[self._race]["strength"]
         self._name = self.get_fantasy_name()
     
+    def buy(self, item):
+        if self._golds < item.price:
+            print(f"You don't have enough gold to buy a {item}")
+            print(f"{item} price: {item.price}")
+            print(f"My golds: {self._golds}")
+            return
+
+        if self.inventory_weight + item.weight > self._strength:
+            print("Inventory is heavy :(")
+            print(f"Inventory weight: {self.inventory_weight}")
+            return
+
+        print(f"{self._name} bought {item}")
+        time.sleep(1)
+        self._inventory.append(item)
+        self._golds -= item.price
+        print(f"You have {self._golds} golds left in your pocket.")
+        time.sleep(1)
+
+    @property
+    def inventory_weight(self):
+        return sum([item.weight for item in self._inventory])
+
     @staticmethod
     def get_fantasy_name():
         FIRST = ['A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro', 'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con',

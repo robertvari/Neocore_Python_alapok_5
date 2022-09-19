@@ -85,11 +85,3 @@ class Forest(Location_Base):
         elif response == "2":
             print("Fight!!!")
             input()
-
-
-if __name__ == "__main__":
-    from characters import Player
-    player = Player()
-
-    location = Forest("Dark Forest")
-    location.enter(player)
