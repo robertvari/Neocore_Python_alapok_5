@@ -1,10 +1,12 @@
 import random, os, time
-from characters import AIPlayer
+from game_assets.characters import AIPlayer
+
 
 class Location_Base:
-    def __init__(self, name) -> None:
+    def __init__(self, name, game_instance) -> None:
+        self._game_instance = game_instance
         self._name = name
-        self._player = None
+        self._player = game_instance.player
         self._ai_players = []
 
         self._create()
@@ -13,18 +15,17 @@ class Location_Base:
         for _ in range(random.randint(0, 10)):
             self._ai_players.append(AIPlayer())
 
-    def enter(self, player):
+    def enter(self):
         self._clear_screen()
-        self._player = player
 
     def _clear_screen(self):
         os.system("cls")
 
 class Tavern(Location_Base):
-    def enter(self, player):
-        super().enter(player)
+    def enter(self):
+        super().enter()
 
-        print(f"Wellcome {player} in the {self._name} tavern.")
+        print(f"Wellcome {self._player} in the {self._name} tavern.")
         time.sleep(1)
 
         print("If you have gold you can buy a dring")
@@ -42,19 +43,23 @@ class Village(Location_Base):
     def enter(self, player):
         super().enter(player)
 
-        print(f"Wellcome {player} in {self._name} willage.")
+        print(f"Wellcome {self._player} in {self._name} willage.")
         time.sleep(1)
 
         print("There is a neerby tavern.")
         print("1 Go to the tavern")
         print("2 Go back to the forest")
+        print("3 Exit game")
 
         response = input()
 
-        if response == "2":
-            print("See you later. Safe travel!")
+        if response == "1":
+            print("You enter the tavern.")
+            self._game_instance.tavern.enter(self._player)
+        elif response == "2":
+            print("You enter the forest")
         else:
-            print("You enter the forest.")
+            print("Exit game")
 
 class Forest(Location_Base):
     def enter(self, player):
