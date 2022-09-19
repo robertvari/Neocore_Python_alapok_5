@@ -1,6 +1,14 @@
 import random
 
 class Character_Base:
+    race_list = {
+        "human": {"strength": 20, "max_HP": 50},
+        "ork": {"strength": 100, "max_HP": 130},
+        "elf": {"strength": 30, "max_HP": 80},
+        "dwarf": {"strength": 150, "max_HP": 130},
+    }
+
+
     def __init__(self) -> None:
         self._name = None
         self._race = None
@@ -18,7 +26,28 @@ class Character_Base:
         self._create()
 
     def _create(self):
-        pass
+        self._race = random.choice(list(self.race_list))
+        self._max_HP = self.race_list[self._race]["max_HP"]
+        self._current_HP = self._max_HP
+        self._strength = self.race_list[self._race]["strength"]
+
+        self._name = ""
+    
+    @staticmethod
+    def get_fantasy_name():
+        FIRST = ['A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro', 'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con',
+                 'Cor', 'Dag', 'Doo', 'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro', 'Ga', 'Gala', 'Has',
+                 'He', 'Heim', 'Ho', 'Isil', 'In', 'Ini', 'Is', 'Ka', 'Kuo', 'Lance', 'Lo', 'Ma', 'Mag', 'Mi', 'Mo',
+                 'Moon', 'Mor', 'Mora', 'Nin', 'O', 'Obi', 'Og', 'Pelli', 'Por', 'Ran', 'Rud', 'Sam', 'She', 'Sheel',
+                 'Shin', 'Shog', 'Son', 'Sur', 'Theo', 'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Ya', 'Yo', 'Yyr']
+
+        SECOND = ['ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den', 'di', 'dil', 'din', 'do', 'dor', 'dra',
+                  'dur', 'gi', 'gauble', 'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'ki', 'koon', 'ku',
+                  'lad', 'ler', 'li', 'lot', 'ma', 'man', 'mir', 'mus', 'nan', 'ni', 'nor', 'nu', 'pian', 'ra', 'rak',
+                  'ric', 'rin', 'rum', 'rus', 'rut', 'sek', 'sha', 'thos', 'thur', 'toa', 'tu', 'tur', 'tred', 'varl',
+                  'wain', 'wan', 'win', 'wise', 'ya']
+
+        return f"{random.choice(FIRST)}{random.choice(SECOND)}"
 
     @property
     def stats(self):
