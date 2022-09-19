@@ -72,12 +72,22 @@ class Character_Base:
 
 
 class Player(Character_Base):
-    pass
+    def _create(self):
+        self._name = input("What is your name?")
+        self._race = input(f"What is your race: {list(self.race_list)}")
+
+        while not self._race in self.race_list:
+            print("Wrong race. Try again.")
+            self._race = input(f"What is your race: {list(self.race_list)}")
+        
+        self._max_HP = self.race_list[self._race]["max_HP"]
+        self._current_HP = self._max_HP
+        self._strength = self.race_list[self._race]["strength"]
 
 class AIPlayer(Character_Base):
     pass
 
 
 if __name__ == "__main__":
-    ai_player = AIPlayer()
-    ai_player.stats
+    player = Player()
+    player.stats
