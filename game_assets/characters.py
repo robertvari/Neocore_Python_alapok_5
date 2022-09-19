@@ -73,8 +73,8 @@ class Character_Base:
 
 class Player(Character_Base):
     def _create(self):
-        self._name = input("What is your name?")
-        self._race = input(f"What is your race: {list(self.race_list)}")
+        self._name = "Robert"
+        self._race = "human"
 
         while not self._race in self.race_list:
             print("Wrong race. Try again.")

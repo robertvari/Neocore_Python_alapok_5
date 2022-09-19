@@ -21,13 +21,10 @@ class Location_Base:
         os.system("cls")
 
 class Tavern(Location_Base):
-    pass
-
-class Village(Location_Base):
     def enter(self, player):
         super().enter(player)
 
-        print(f"Wellcome {player} in the Black Horse tavern.")
+        print(f"Wellcome {player} in the {self._name} tavern.")
         time.sleep(1)
 
         print("If you have gold you can buy a dring")
@@ -41,6 +38,24 @@ class Village(Location_Base):
         else:
             print("You bought a cup of beer.")
 
+class Village(Location_Base):
+    def enter(self, player):
+        super().enter(player)
+
+        print(f"Wellcome {player} in {self._name} willage.")
+        time.sleep(1)
+
+        print("There is a neerby tavern.")
+        print("1 Go to the tavern")
+        print("2 Go back to the forest")
+
+        response = input()
+
+        if response == "2":
+            print("See you later. Safe travel!")
+        else:
+            print("You enter the forest.")
+
 class Forest(Location_Base):
     def enter(self, player):
         super().enter(player)
@@ -49,7 +64,7 @@ class Forest(Location_Base):
         time.sleep(1)
         print("You hear something from a nearby bush.")
         time.sleep(3)
-        
+
         print("Something attacks yout...")
 
 
@@ -57,5 +72,5 @@ if __name__ == "__main__":
     from characters import Player
     player = Player()
 
-    village = Village("Whiterun")
-    village.enter(player)
+    location = Forest("Dark Forest")
+    location.enter(player)
