@@ -18,7 +18,7 @@ class Item_Base:
         print(f"Price: {self._price}")
         print(f"Weight: {self._weight}")
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self._name
 
     def __rept__(self):

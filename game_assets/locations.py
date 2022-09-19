@@ -1,5 +1,7 @@
+from pkgutil import iter_modules
 import random, os, time
 from game_assets.characters import AIPlayer
+from game_assets.items import CommonItem, WeaponItem
 
 
 class Location_Base:
@@ -22,6 +24,24 @@ class Location_Base:
         os.system("cls")
 
 class Tavern(Location_Base):
+    item_list = [
+        {"name": "Cheese", "price": 10, "weight": 5, "item_type": CommonItem},
+        {"name": "Beer", "price": 13, "weight": 3, "item_type": CommonItem},
+        {"name": "Sword", "price": 45, "weight": 14, "item_type": WeaponItem},
+        {"name": "Hammer", "price": 65, "weight": 35, "item_type": WeaponItem},
+    ]
+
+    def __init__(self, name, game_instance):
+        # attributes can be created only in __init__
+        self._shop_list = []
+
+        super().__init__(name, game_instance)
+
+    def _create(self):
+        for item_data in self.item_list:
+            item_object = item_data["item_type"](item_data["name"], item_data["price"], item_data["weight"])
+            self._shop_list.append(item_object)
+
     def enter(self):
         super().enter()
 
