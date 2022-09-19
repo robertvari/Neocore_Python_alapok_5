@@ -15,7 +15,7 @@ class BattleOfClasses:
         self.tavern = Tavern("Black Horse", self)
         self.forest = Forest("Dark Forest", self)
         
-        self.village.enter(self.player)
+        self.village.enter()
     
     def intor(self):
         print("="*50, "BATTLE OF CLASSES", "="*50)

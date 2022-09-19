@@ -34,14 +34,15 @@ class Tavern(Location_Base):
 
         response = input()
 
-        if response == "2":
-            print("See you later. Safe travel!")
+        if response == "1":
+            print("You buy a drink")
+            input()
         else:
-            print("You bought a cup of beer.")
+            self._game_instance.village.enter()
 
 class Village(Location_Base):
-    def enter(self, player):
-        super().enter(player)
+    def enter(self):
+        super().enter()
 
         print(f"Wellcome {self._player} in {self._name} willage.")
         time.sleep(1)
@@ -55,22 +56,35 @@ class Village(Location_Base):
 
         if response == "1":
             print("You enter the tavern.")
-            self._game_instance.tavern.enter(self._player)
+            time.sleep(2)
+            self._game_instance.tavern.enter()
         elif response == "2":
             print("You enter the forest")
+            time.sleep(2)
+            self._game_instance.forest.enter()
         else:
             print("Exit game")
 
 class Forest(Location_Base):
-    def enter(self, player):
-        super().enter(player)
+    def enter(self):
+        super().enter()
 
         print("You entered into a dark forest.")
         time.sleep(1)
         print("You hear something from a nearby bush.")
         time.sleep(3)
 
-        print("Something attacks yout...")
+        print("Something attacks yout. What do you do?")
+        print("1. You run back to the village")
+        print("2. Fight for your life")
+
+        response = input()
+
+        if response == "1":
+            self._game_instance.village.enter()
+        elif response == "2":
+            print("Fight!!!")
+            input()
 
 
 if __name__ == "__main__":
