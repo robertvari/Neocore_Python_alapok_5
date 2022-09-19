@@ -30,8 +30,7 @@ class Character_Base:
         self._max_HP = self.race_list[self._race]["max_HP"]
         self._current_HP = self._max_HP
         self._strength = self.race_list[self._race]["strength"]
-
-        self._name = ""
+        self._name = self.get_fantasy_name()
     
     @staticmethod
     def get_fantasy_name():
