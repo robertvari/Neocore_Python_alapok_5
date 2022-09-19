@@ -6,7 +6,7 @@ class BattleOfClasses:
         self.intor()
     
     def intor(self):
-        pass
+        print("="*50, "BATTLE OF CLASSES", "="*50)
 
     def clear_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
