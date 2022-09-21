@@ -6,10 +6,15 @@ player = Player()
 enemy = AIPlayer()
 
 # create items
-cheese = CommonItem("Cheese", 1, 10)
-shield = ArmorItem("Shield", 1, 5)
-sword = WeaponItem("Sword", 1, 30)
+cheese = CommonItem("Cheese", 1, 1)
 
-player.add_to_inventory(cheese)
-player.add_to_inventory(shield)
+shield = ArmorItem("Shield", 1, 1)
+magic_shield = ArmorItem("Magic Shield", 1, 1)
+
+sword = WeaponItem("Sword", 1, 1)
+hammer = WeaponItem("Hammer", 1, 1)
+
 player.add_to_inventory(sword)
+player.add_to_inventory(shield)
+
+player.attack(enemy)

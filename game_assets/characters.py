@@ -62,6 +62,14 @@ class Character_Base:
         print(f"{self} take {item}")
         self._inventory.append(item)
 
+        # check if item is armor
+        if item.item_type == "armor" and not self._left_hand:
+            self._left_hand = item
+        
+        # check if item is weapon
+        if item.item_type == "weapon" and not self._right_hand:
+            self._right_hand = item
+
     def attack(self, other):
         self._clear_screen()
         print(f"{self} attacks {other}")

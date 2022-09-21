@@ -3,10 +3,15 @@ class Item_Base:
         self._name = name
         self._price = price
         self._weight = weight
+        self._item_type = None
 
     @property
     def price(self):
         return self._price
+
+    @property
+    def item_type(self):
+        return self._item_type
 
     @property
     def weight(self):
@@ -25,11 +30,17 @@ class Item_Base:
         return self._name
 
 class CommonItem(Item_Base):
-    pass
+    def __init__(self, name, price, weight) -> None:
+        super().__init__(name, price, weight)
+        self._item_type = "common"
 
 class ArmorItem(Item_Base):
-    pass
+    def __init__(self, name, price, weight) -> None:
+        super().__init__(name, price, weight)
+        self._item_type = "armor"
 
 class WeaponItem(Item_Base):
-    pass
+    def __init__(self, name, price, weight) -> None:
+        super().__init__(name, price, weight)
+        self._item_type = "weapon"
 
