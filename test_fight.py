@@ -13,6 +13,5 @@ magic_shield = ArmorItem("Magic Shield", 1, 1)
 sword = WeaponItem("Sword", 1, 1)
 hammer = WeaponItem("Hammer", 1, 1)
 
-
-
-# player.attack(enemy)
+player.add_to_inventory(sword)
+player.attack(enemy)

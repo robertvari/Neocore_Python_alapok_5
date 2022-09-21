@@ -56,6 +56,6 @@ class WeaponItem(Item_Base):
         super().__init__(name, price, weight)
         self._item_type = "weapon"
     
-    def use(self, character):
-        print(f"{character} deals {self._modifier} damage with {self}")
-
+    def use(self, owner, enemy):
+        print(f"{owner} attacks {enemy} with {self}")
+        enemy.take_damage(owner.attack_strength + self._modifier)

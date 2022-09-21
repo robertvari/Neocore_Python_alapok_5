@@ -18,6 +18,7 @@ class Character_Base:
         self._left_hand = None
 
         self._strength = 0
+        self.attack_strength = 0
         self._initiative = random.randint(1, 10)
         self._current_HP = 0
         self._max_HP = 0
@@ -74,27 +75,27 @@ class Character_Base:
         self._clear_screen()
         print(f"{self} attacks {other}")
         time.sleep(1)
-        attack_strength = random.randint(0, self._strength)
+        self.attack_strength = random.randint(0, self._strength)
 
-        # TODO add weapon strength if we are holding eny
-        if self._right_hand:
-            pass
-
-        if not attack_strength:
+        if not self.attack_strength:
             print(f"{self} misses... :((")
             time.sleep(2)
         else:
-            if attack_strength == self._strength:
-                print(f"{self} deals a critical hit to {other}!!!")
+            if self._right_hand:
+                self._right_hand.use(self, other)
             else:
-                print(f"{self} hits {other} with {attack_strength} strength.")
+                if self.attack_strength == self._strength:
+                    print(f"{self} deals a critical hit to {other}!!!")
+                else:
+                    print(f"{self} hits {other} with {self.attack_strength} strength.")
 
-            time.sleep(2)
-            other.take_damage(attack_strength)
+                time.sleep(2)
+                other.take_damage(self.attack_strength)
     
     def take_damage(self, damage):
         # TODO reduce damage if we have shield in our left hand
         self._current_HP -= damage
+        print(f"{self} takes {damage} damage.")
 
         if self._current_HP <= 0:
             self._clear_screen()
@@ -105,7 +106,7 @@ class Character_Base:
         self._current_HP += value
         if self._current_HP > self._max_HP:
             self._current_HP = self._max_HP
-            
+
         print(f"{self} heals {value} Current HP: {self._current_HP}")
 
     def _clear_screen(self):
