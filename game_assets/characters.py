@@ -63,6 +63,7 @@ class Character_Base:
 
         if not attack_strength:
             print(f"{self} misses... :((")
+            time.sleep(2)
         else:
             if attack_strength == self._strength:
                 print(f"{self} deals a critical hit to {other}!!!")
@@ -78,12 +79,15 @@ class Character_Base:
 
         if self._current_HP <= 0:
             self._clear_screen()
-            print(f"{self} is dead!")
-            time.sleep(1)
-
+            print(f"RIP {self}")
+            time.sleep(5)
 
     def _clear_screen(self):
         os.system("cls")
+
+    @property
+    def is_alive(self):
+        return self._current_HP > 0
 
     @property
     def inventory_weight(self):
