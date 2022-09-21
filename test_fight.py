@@ -14,4 +14,5 @@ sword = WeaponItem("Sword", 1, 1)
 hammer = WeaponItem("Hammer", 1, 1)
 
 player.add_to_inventory(sword)
+enemy.add_to_inventory(shield)
 player.attack(enemy)

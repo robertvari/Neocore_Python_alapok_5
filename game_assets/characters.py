@@ -93,7 +93,11 @@ class Character_Base:
                 other.take_damage(self.attack_strength)
     
     def take_damage(self, damage):
-        # TODO reduce damage if we have shield in our left hand
+        # reduce damage if we have shield in our left hand
+        if self._left_hand:
+            print(f"{self} parry damage with {self._left_hand}")
+            damage -= self._left_hand.modifier
+
         self._current_HP -= damage
         print(f"{self} takes {damage} damage.")
 

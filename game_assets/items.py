@@ -10,6 +10,10 @@ class Item_Base:
         print("USE CALLED IN BASE CLASS. OVERIDE THIS")
 
     @property
+    def modifier(self):
+        return self._modifier
+
+    @property
     def price(self):
         return self._price
 
