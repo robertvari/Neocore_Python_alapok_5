@@ -21,10 +21,13 @@ class Item_Base:
     def __str__(self):
         return self._name
 
-    def __rept__(self):
+    def __repr__(self):
         return self._name
 
 class CommonItem(Item_Base):
+    pass
+
+class ArmorItem(Item_Base):
     pass
 
 class WeaponItem(Item_Base):

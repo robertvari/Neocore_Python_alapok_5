@@ -8,7 +8,6 @@ class Character_Base:
         "dwarf": {"strength": 150, "max_HP": 130},
     }
 
-
     def __init__(self) -> None:
         self._name = None
         self._race = None
@@ -52,6 +51,16 @@ class Character_Base:
         self._golds -= item.price
         print(f"You have {self._golds} golds left in your pocket.")
         time.sleep(1)
+
+    def add_to_inventory(self, item):
+        if self.inventory_weight + item.weight > self._strength:
+            print("Inventory is heavy :(")
+            print(f"Inventory weight: {self.inventory_weight}")
+            time.sleep(3)
+            return
+        
+        print(f"{self} take {item}")
+        self._inventory.append(item)
 
     def attack(self, other):
         self._clear_screen()
@@ -118,6 +127,7 @@ class Character_Base:
 
         print(f"Golds: {self._golds}")
         print(f"Inventory: {self._inventory}")
+        print(f"Weight: {self.inventory_weight}")
         print(f"Left Hand: {self._left_hand}")
         print(f"Right Hand: {self._right_hand}")
 
