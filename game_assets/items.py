@@ -6,6 +6,9 @@ class Item_Base:
         self._modifier = modifier
         self._item_type = None
 
+    def use(self, character):
+        print("USE CALLED IN BASE CLASS. OVERIDE THIS")
+
     @property
     def price(self):
         return self._price
@@ -30,18 +33,29 @@ class Item_Base:
     def __repr__(self):
         return self._name
 
+
 class CommonItem(Item_Base):
     def __init__(self, name, price, weight) -> None:
         super().__init__(name, price, weight)
         self._item_type = "common"
 
+    def use(self, character):
+        print(f"{character} eats {self}")
+        character.heal(self._modifier)
+
 class ArmorItem(Item_Base):
     def __init__(self, name, price, weight) -> None:
         super().__init__(name, price, weight)
         self._item_type = "armor"
+    
+    def use(self, character):
+        print(f"{character} parry {self._modifier} damage with {self}")
 
 class WeaponItem(Item_Base):
     def __init__(self, name, price, weight) -> None:
         super().__init__(name, price, weight)
         self._item_type = "weapon"
+    
+    def use(self, character):
+        print(f"{character} deals {self._modifier} damage with {self}")
 

@@ -101,6 +101,13 @@ class Character_Base:
             print(f"RIP {self}")
             time.sleep(5)
 
+    def heal(self, value):
+        self._current_HP += value
+        if self._current_HP > self._max_HP:
+            self._current_HP = self._max_HP
+            
+        print(f"{self} heals {value} Current HP: {self._current_HP}")
+
     def _clear_screen(self):
         os.system("cls")
 
