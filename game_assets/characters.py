@@ -77,6 +77,8 @@ class Character_Base:
         attack_strength = random.randint(0, self._strength)
 
         # TODO add weapon strength if we are holding eny
+        if self._right_hand:
+            pass
 
         if not attack_strength:
             print(f"{self} misses... :((")

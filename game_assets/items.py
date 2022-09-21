@@ -1,8 +1,9 @@
 class Item_Base:
-    def __init__(self, name, price, weight) -> None:
+    def __init__(self, name, price, weight, modifier=10):
         self._name = name
         self._price = price
         self._weight = weight
+        self._modifier = modifier
         self._item_type = None
 
     @property
