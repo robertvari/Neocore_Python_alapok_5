@@ -1,4 +1,4 @@
-import random, time
+import random, time, os
 
 class Character_Base:
     race_list = {
@@ -53,6 +53,38 @@ class Character_Base:
         print(f"You have {self._golds} golds left in your pocket.")
         time.sleep(1)
 
+    def attack(self, other):
+        self._clear_screen()
+        print(f"{self} attacks {other}")
+        time.sleep(1)
+        attack_strength = random.randint(0, self._strength)
+
+        # TODO add weapon strength if we are holding eny
+
+        if not attack_strength:
+            print(f"{self} misses... :((")
+        else:
+            if attack_strength == self._strength:
+                print(f"{self} deals a critical hit to {other}!!!")
+            else:
+                print(f"{self} hits {other} with {attack_strength} strength.")
+
+            time.sleep(2)
+            other.take_damage(attack_strength)
+    
+    def take_damage(self, damage):
+        # TODO reduce damage if we have shield in our left hand
+        self._current_HP -= damage
+
+        if self._current_HP <= 0:
+            self._clear_screen()
+            print(f"{self} is dead!")
+            time.sleep(1)
+
+
+    def _clear_screen(self):
+        os.system("cls")
+
     @property
     def inventory_weight(self):
         return sum([item.weight for item in self._inventory])
@@ -92,6 +124,9 @@ class Character_Base:
         print(f"Max HP: {self._max_HP}")
         print(f"Current HP: {self._current_HP}")
 
+    def __str__(self) -> str:
+        return self._name
+
     def __repr__(self):
         return self._name
 
@@ -115,4 +150,21 @@ class AIPlayer(Character_Base):
 
 if __name__ == "__main__":
     player = Player()
-    player.stats
+    enemy = AIPlayer()
+
+    winner = None
+    while True:        
+        # enemy attacks player
+        enemy.attack(player)
+        if not player.is_alive:
+            winner = enemy
+            break
+        
+        # player attacks enemy
+        player.attack(enemy)
+        if not enemy.is_alive:
+            winner = player
+            break
+    
+    os.system("cls")
+    print(f"{winner} wins the fight")
